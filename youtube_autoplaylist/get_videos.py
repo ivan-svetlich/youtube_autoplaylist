@@ -14,7 +14,7 @@ def get_client():
 
     api_service_name = "youtube"
     api_version = "v3"
-    api_key_file = "credentials/api_key.json"
+    api_key_file = "../credentials/api_key.json"
     # Get API key
     with open(api_key_file, "r") as f:
         developer_key = json.load(f)
