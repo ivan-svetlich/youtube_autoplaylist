@@ -7,7 +7,7 @@ import googleapiclient.errors
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
 
-def get_videos_from_playlist(playlist_id, max_results):
+def get_client():
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -21,6 +21,10 @@ def get_videos_from_playlist(playlist_id, max_results):
     youtube = googleapiclient.discovery.build(
         api_service_name, api_version, developerKey=developer_key["api_key"])
 
+    return youtube
+
+
+def get_videos_from_playlist(youtube, playlist_id, max_results):
     try:
         request = youtube.playlistItems().list(
             part="snippet",
