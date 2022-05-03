@@ -12,7 +12,7 @@ Create personalized YouTube playlists from your subscriptions feed based on your
 ## Setup
 1. Download and extract .ZIP
 
-2. You need your own authorization credentials from Google to use the YouTube API. Follow this guide: 
+2. You need your own authorization credentials from Google to use the YouTube API. Follow this guide to register an app in Google CLoud Platform: 
 * https://developers.google.com/youtube/registering_an_application 
 
 3. Open the project's folder, then credentials. Insert your API keys and OAuth 2.0 client secrets in the corresponding files.
@@ -30,7 +30,7 @@ To create a playlist run:
 ```
 python -m autoplaylist -d [DAYS] -k [KEYWORD] -r [RESULTS_PER_CHANNEL]
 ```
-When you run the command for the first time, a browser window will be opened and you will be asked to authorize the app.
+When you run the command for the first time, a browser window will be opened and you will be asked to authorize the app. Make sure your Google account is added to the 'Test Users' list in the Google Cloud Platform console.
 
 You can use the help command to learn more about the command's usage and syntax:
 ```
