@@ -1,7 +1,7 @@
 import argparse
 import datetime
 from get_ids import get_video_ids, get_playlist_ids
-from get_videos_from_playlist import get_videos_from_playlist
+from get_videos import get_videos_from_playlist, get_client
 from youtube_client import YoutubeClient
 
 
@@ -26,8 +26,10 @@ def startup(days=0, keyword="歌", results_per_channel=2):
     print(f"Done. {num_playlists} playlist{'s' if num_playlists != 1 else ''} found.")
     print("Searching videos...")
 
+    api_client = get_client()
     for playlist_id in playlist_ids:
-        videos_response = get_videos_from_playlist(playlist_id, max_results=results_per_channel)
+        videos_response = get_videos_from_playlist(youtube=api_client, playlist_id=playlist_id,
+                                                   max_results=results_per_channel)
         if videos_response is not None:
             ids = get_video_ids(videos_response, days, keyword)
             video_ids.extend(ids)
