@@ -14,7 +14,7 @@ from google.auth.exceptions import MutualTLSChannelError
 
 
 class YoutubeClient:
-    CLIENT_SECRETS_FILE = "credentials/client_secrets.json"
+    CLIENT_SECRETS_FILE = "../credentials/client_secrets.json"
 
     # This variable defines a message to display if the CLIENT_SECRETS_FILE is
     # missing.
