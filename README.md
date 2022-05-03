@@ -1,6 +1,6 @@
 # YouTube Auto-Playlist
 Create personalized YouTube playlists from your subscriptions feed based on your preferences, using the following parameters:
-* Keyword in video title (e g. titles that contain the word "music"
+* Keyword in video title (e g. titles that contain the word "music")
 * How old the video is (e g. videos uploaded in the last 2 days)
 * Number of videos looked up per channel (e g. look up the last 10 videos from each channel)
 
