@@ -65,8 +65,8 @@ def main():
     parser.add_argument('-k', '--keyword', nargs='?', const="歌", default="歌",
                         help='video titles must contain this term (default: "歌" (song in Japanese))')
     parser.add_argument('-r', '--results', dest='results_per_channel', nargs='?', type=int, const=2,
-                        default=2, help='max number of results to retrieve from each channel/playlist '
-                                        '(default: 2, min: 1 result per day)')
+                        default=2, help='max number of results to retrieve from each channel '
+                                        '(default: 2, min: 1 result per day, max: 50)')
 
     args = parser.parse_args()
     startup(args.days, args.keyword, args.results_per_channel)
