@@ -34,9 +34,9 @@ or
 ```
 python -m autoplaylist --days [DAYS] --keyword [KEYWORD] --results [RESULTS_PER_CHANNEL]
 ```
-When you run the command for the first time, a browser window will be opened and you will be asked to authorize the app. Make sure your Google account is added to the 'Test Users' list in the Google Cloud Platform console.
+When you run the command for the first time, a browser window will be opened and you'll be asked to authorize the app. Make sure your Google account is added to the 'Test Users' list in the Google Cloud Platform console.
 
-A YouTube playlist titled "[KEYWORD] Auto Playlist ([CURRENT DATETIME])", containing the videos that matched your preferences, is created in your library.
+A YouTube playlist titled "[KEYWORD] Auto Playlist (yyyy-MM-dd HH:mm:ss.SSSSSS)", containing the videos that matched your preferences, is created in your library.
 
 You can use the help command to learn more about the command's usage and syntax:
 ```
