@@ -48,13 +48,13 @@ Let's run the command using the default preferences:
 ```
 python -m autoplaylist --days 0 --keyword 歌 --results 2
 ```
-This command will search the last 2 uploads from each channel. looking for videos uploaded today that contain the word "歌" (song in Japanese). Because these are the default values, you can get the same result simply running:
+This command will search the last 2 uploads from each channel. looking for videos uploaded today that contain the word "歌" (song in Japanese). Because these are the default values, you can get the same result by simply running:
 ```
 python -m autoplaylist
 ```
 Feel free to modify the code to set different default values. 
 
-If it's the first run, we need to complete the OAuth2 authorization. Bacause the app status is set to "Testing" in Google CLoud Platform, we will see the following warning:
+If it's the first run, we need to complete the OAuth2 authorization. Bacause the app status is set to "Testing" in Google Cloud Platform, we'll see the following warning:
 
 <p align="center"><img alt="warning" src="https://github.com/ivan-svetlich/youtube_autoplaylist/blob/master/images/autoplaylist_oauth_1.png"</p>
 
@@ -62,7 +62,7 @@ After we click continue, we get the usual authorization screen:
 
  <p align="center"><img alt="authorization" src="https://github.com/ivan-svetlich/youtube_autoplaylist/blob/master/images/autoplaylist_oauth_2.png"</p>
 
-This step won't be necesary next time you run the command. If you want to use a different Google account, just delete the autoplaylist.py-oauth2.json file and you will be asked for authorization again.
+This step won't be necesary next time you run the command. If you want to use a different Google account, just delete the ```autoplaylist.py-oauth2.json``` file and you'll be asked for authorization again.
 
 If everything goes well, we should see an output like this:
 ```
