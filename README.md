@@ -12,7 +12,7 @@ Create personalized YouTube playlists from your subscriptions feed based on your
 ## Setup
 1. Download and extract .ZIP
 
-2. You need your own authorization credentials from Google to use the YouTube API. Follow this guide to register an app in Google CLoud Platform: 
+2. You need your own authorization credentials from Google to use the YouTube API. Follow this guide to register an app in Google Cloud Platform: 
 * https://developers.google.com/youtube/registering_an_application 
 
 3. Open the project's folder, then credentials. Insert your API keys and OAuth 2.0 client secrets in the corresponding files.
