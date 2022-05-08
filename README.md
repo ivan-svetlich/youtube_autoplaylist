@@ -34,9 +34,9 @@ or
 ```
 python -m autoplaylist --days [DAYS] --keyword [KEYWORD] --results [RESULTS_PER_CHANNEL]
 ```
-When you run the command for the first time, a browser window will be opened and you will be asked to authorize the app. Make sure your Google account is added to the 'Test Users' list in the Google Cloud Platform console.
+When you run the command for the first time, a browser window will be opened and you'll be asked to authorize the app. Make sure your Google account is added to the 'Test Users' list in the Google Cloud Platform console.
 
-A YouTube playlist titled "[KEYWORD] Auto Playlist ([CURRENT DATETIME])", containing the videos that matched your preferences, is created in your library.
+A YouTube playlist containing the videos that matched your preferences is created in your library.
 
 You can use the help command to learn more about the command's usage and syntax:
 ```
@@ -48,7 +48,7 @@ Let's run the command using the default preferences:
 ```
 python -m autoplaylist --days 0 --keyword 歌 --results 2
 ```
-This command will search the last 2 uploads from each channel. looking for videos uploaded today that contain the word "歌" (song in Japanese). Because these are the default values, you can get the same result by simply running:
+This command will search the last 2 uploads from each channel, looking for videos uploaded today that contain the word "歌" (song in Japanese). Because these are the default values, you can get the same result by simply running:
 ```
 python -m autoplaylist
 ```
