@@ -1,17 +1,10 @@
 #!/usr/bin/python
-import sys
-import warnings
 
 import googleapiclient
-import httplib2
 import os
 import traceback
 
 from googleapiclient.discovery import build
-from oauth2client.client import flow_from_clientsecrets
-from oauth2client.file import Storage
-from oauth2client.tools import argparser, run_flow
-from google.auth.exceptions import MutualTLSChannelError
 
 
 class YoutubeClient:
