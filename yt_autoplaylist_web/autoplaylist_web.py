@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 from datetime import datetime
-
 import flask
-from flask_cors import CORS, cross_origin
 from flask import request
-
+from flask_cors import CORS, cross_origin
 import google.oauth2.credentials
 from google_auth_oauthlib.flow import Flow
 from utils import get_playlist_ids, get_video_ids, get_client, get_videos_from_playlist
@@ -123,9 +121,6 @@ def oauth2callback():
     flow.fetch_token(authorization_response=authorization_response)
 
     # Store the credentials in the session.
-    # ACTION ITEM for developers:
-    #     Store user's access and refresh tokens in your data store if
-    #     incorporating this code into your real app.
     credentials = flow.credentials
     flask.session['credentials'] = {
         'token': credentials.token,

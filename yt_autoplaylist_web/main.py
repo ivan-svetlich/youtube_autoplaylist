@@ -1,6 +1,6 @@
 import os
 
-from yt_autoplaylist_web.yt_autoplaylist_web import app
+from autoplaylist_web import app
 
 if __name__ == '__main__':
     # When running locally, disable OAuth-lib's HTTPs verification. When
