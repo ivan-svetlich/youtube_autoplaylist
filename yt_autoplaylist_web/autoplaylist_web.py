@@ -22,7 +22,16 @@ CORS(app, support_credentials=True)
 @app.route('/')
 @cross_origin(supports_credentials=True)
 def index():
+    keyword = request.args.get("keyword")
+    days = request.args.get("days")
+    results_per_channel = request.args.get("results_per_channel")
+
     if 'credentials' not in flask.session:
+        flask.session['options'] = {
+            'keyword': keyword,
+            'days': days,
+            'results_per_channel': results_per_channel
+        }
         return flask.redirect('authorize')
 
     # Load the credentials from the session.
@@ -30,60 +39,71 @@ def index():
         **flask.session['credentials'])
 
     if credentials is None or credentials.expired or not credentials.valid:
+        flask.session['options'] = {
+            'keyword': keyword,
+            'days': days,
+            'results_per_channel': results_per_channel
+        }
         return flask.redirect('authorize')
-
-    keyword = request.args.get("keyword")
-    days = int(request.args.get("days"))
-    results_per_channel = int(request.args.get("max_results"))
 
     print("Authenticating....")
 
     youtube_client = YoutubeClient(credentials)
+    try:
+        print("Searching playlists...")
 
-    print("Searching playlists...")
+        subs_responses = youtube_client.get_subscriptions()
+        playlist_ids = []
+        video_ids = []
+        for sub_response in subs_responses:
+            playlist_ids.extend(get_playlist_ids(sub_response))
 
-    subs_responses = youtube_client.get_subscriptions()
-    playlist_ids = []
-    video_ids = []
-    for sub_response in subs_responses:
-        playlist_ids.extend(get_playlist_ids(sub_response))
+        num_playlists = len(playlist_ids)
 
-    num_playlists = len(playlist_ids)
+        print(f"Done. {num_playlists} playlist{'s' if num_playlists != 1 else ''} found.")
+        print("Searching videos...")
 
-    print(f"Done. {num_playlists} playlist{'s' if num_playlists != 1 else ''} found.")
-    print("Searching videos...")
+        options = get_options()
 
-    api_client = get_client()
-    for playlist_id in playlist_ids:
-        videos_response = get_videos_from_playlist(youtube=api_client, playlist_id=playlist_id,
-                                                   max_results=results_per_channel)
-        if videos_response is not None:
-            ids = get_video_ids(videos_response, days, keyword)
-            video_ids.extend(ids)
+        api_client = get_client()
+        for playlist_id in playlist_ids:
+            videos_response = get_videos_from_playlist(youtube=api_client, playlist_id=playlist_id,
+                                                       max_results=options['results_per_channel'])
+            if videos_response is not None:
+                ids = get_video_ids(videos_response, options['days'], options['keyword'])
+                video_ids.extend(ids)
 
-    num_videos = len(video_ids)
+        num_videos = len(video_ids)
 
-    print(f"Done. {num_videos} video{'s' if num_videos != 1 else ''} found.")
+        print(f"Done. {num_videos} video{'s' if num_videos != 1 else ''} found.")
 
-    if num_videos > 0:
-        print(f"Creating new playlist...")
+        if num_videos > 0:
+            print(f"Creating new playlist...")
 
-        playlist_title = f"{keyword} Auto Playlist ({datetime.now()})"
-        playlist_id = youtube_client.create_playlist(playlist_title)
+            playlist_title = f"{options['keyword']} Auto Playlist ({datetime.now()})"
+            playlist_id = youtube_client.create_playlist(playlist_title)
 
-        print(f"Done. New playlist: {playlist_title}")
-        print(f"Adding videos to playlist...")
+            print(f"Done. New playlist: {playlist_title}")
+            print(f"Adding videos to playlist...")
 
-        for video_id in video_ids:
-            youtube_client.add_video_to_playlist(playlist_id, video_id)
+            for video_id in video_ids:
+                youtube_client.add_video_to_playlist(playlist_id, video_id)
 
-        print(f"Done. {num_videos} video{'s' if num_videos != 1 else ''} added to playlist.")
-    else:
-        print("Try increasing the number of results per channel "
-              "and/or the number of days for the search")
-        print("Use --help command to get info about the optional arguments.")
+            print(f"Done. {num_videos} video{'s' if num_videos != 1 else ''} added to playlist.")
+        else:
+            print("Try increasing the number of results per channel "
+                  "and/or the number of days for the search")
+            print("Use --help command to get info about the optional arguments.")
 
-    return flask.redirect("http://localhost:3000/success")
+        return flask.redirect("http://localhost:3000/success")
+
+    except google.auth.exceptions.RefreshError:
+        flask.session['options'] = {
+            'keyword': keyword,
+            'days': days,
+            'results_per_channel': results_per_channel
+        }
+        return flask.redirect('authorize')
 
 
 @app.route('/authorize')
@@ -132,3 +152,21 @@ def oauth2callback():
     }
 
     return flask.redirect(flask.url_for('index'))
+
+
+def get_options():
+    params = {'keyword': '歌', 'days': '0', 'results_per_channel': '2'}
+
+    for param in params.keys():
+        op = request.args.get(param)
+        if op is not None:
+            params[param] = op
+        else:
+            op = flask.session['options'][param]
+            if op is not None:
+                params[param] = op
+
+    params['days'] = int(params['days'])
+    params['results_per_channel'] = int(params['results_per_channel'])
+
+    return params
