@@ -7,6 +7,7 @@ Create personalized YouTube playlists from your subscriptions feed based on your
 ## Table of contents
 * [Setup](#setup)
 * [Usage](#usage)
+* [Example](#example)
 * [Technologies](#technologies)
 
 ## Setup
