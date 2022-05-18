@@ -1,8 +1,11 @@
-# YouTube Auto-Playlist
+# YouTube AutoPlaylist
 Create personalized YouTube playlists from your subscriptions feed based on your preferences, using the following parameters:
 * Keyword in video title (e g. titles that contain the word "music")
 * How old the video is (e g. videos uploaded in the last 2 days)
 * Number of videos looked up per channel (e g. look up the last 10 videos from each channel)
+
+YouTube AutoPlaylist is also a Web App. Check it out: 
+  * **https://github.com/ivan-svetlich/YouTube-AutoPlaylist**
 
 ## Table of contents
 * [Setup](#setup)
@@ -14,7 +17,7 @@ Create personalized YouTube playlists from your subscriptions feed based on your
 1. Download and extract .ZIP
 
 2. You need your own authorization credentials from Google to use the YouTube API. Follow this guide to register an app in Google Cloud Platform: 
-* https://developers.google.com/youtube/registering_an_application 
+  * https://developers.google.com/youtube/registering_an_application 
 
 3. Open the project's folder, then credentials. Insert your API keys and OAuth 2.0 client secrets in the corresponding files.
 
